@@ -20,6 +20,7 @@
 #include <unistd.h>
 #include <ctype.h>
 
+
 typedef struct client_s {
     char *ip;
     int fd;
@@ -40,4 +41,6 @@ typedef struct server_s {
 } server_t;
 
 void serveur(int port);
+void create_client(int socket, server_t *srv);
+void client_connection(server_t *server, int i);
 #endif /* !CLIENT_H_ */

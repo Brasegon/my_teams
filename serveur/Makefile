@@ -5,6 +5,7 @@ CC	= gcc
 RM	= rm -f
 
 SRCS	= ./main.c \
+	  ./src/client.c \
 	  ./src/server.c 
 
 OBJS	= $(SRCS:.c=.o)
