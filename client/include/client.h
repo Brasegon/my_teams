@@ -15,16 +15,26 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <unistd.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <sys/socket.h>
+#include <sys/types.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <errno.h>
+#include <string.h>
+#include <time.h> 
 
 typedef struct s_client
 {
     char *ip;
-    int port;
+    short port;
 }t_client;
 
 // init.c
 int initClient(t_client *c);
+int loop(t_client *c);
+int readFromClient(t_client *c, int fd, char *buff);
 
 #endif /* !CLIENT_H_ */

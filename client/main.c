@@ -23,11 +23,12 @@ int main(int ac, char **av)
     }
     t_client *client = malloc(sizeof(t_client));
     if (client == NULL) {
-        perror("malloc");
+        perror("Main Malloc");
         exit (84);
     }
     client->ip = av[1];
     client->port = atoi(av[2]);
     initClient(client);
+    free(client);
     return (0);
 }
