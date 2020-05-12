@@ -15,11 +15,19 @@ void print_usage(void)
 
 int main(int ac, char **av)
 {
-    if (ac == 2) {
-        if (strcmp(av[1], "-help") == 0) {
-            print_usage();
-        }
-        return (0);
-    } else
+    if (ac != 3) {
+        print_usage();
+        if (ac == 2 && strcmp(av[1], "-help") == 0)
+            return (0);
         return (84);
+    }
+    t_client *client = malloc(sizeof(t_client));
+    if (client == NULL) {
+        perror("malloc");
+        exit (84);
+    }
+    client->ip = av[1];
+    client->port = atoi(av[2]);
+    initClient(client);
+    return (0);
 }
