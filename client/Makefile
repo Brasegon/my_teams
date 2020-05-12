@@ -12,6 +12,7 @@ CC	= gcc
 RM	= rm -f
 
 SRCS	= ./main.c \
+			./input.c \
 			./init.c
 
 OBJS	= $(SRCS:.c=.o)

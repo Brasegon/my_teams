@@ -30,11 +30,16 @@ typedef struct s_client
 {
     char *ip;
     short port;
+    int socketFd;
 }t_client;
 
 // init.c
+void errorHandling(char *str);
 int initClient(t_client *c);
+int readFromServer(t_client *c, int fd, char *buff);
+
+//input.c
 int loop(t_client *c);
-int readFromClient(t_client *c, int fd, char *buff);
+char *prompt(void);
 
 #endif /* !CLIENT_H_ */
