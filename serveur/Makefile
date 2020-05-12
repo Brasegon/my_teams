@@ -6,7 +6,9 @@ RM	= rm -f
 
 SRCS	= ./main.c \
 	  ./src/client.c \
-	  ./src/server.c 
+	  ./src/commands.c \
+	  ./src/server.c \
+	  ./src/test.c 
 
 OBJS	= $(SRCS:.c=.o)
 
@@ -16,7 +18,7 @@ CFLAGS += -Wall -Wextra
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	 $(CC) $(OBJS) -o $(NAME) $(LDFLAGS)
+	 $(CC) $(OBJS) -o $(NAME) $(LDFLAGS) libmyteams.so
 
 clean:
 	$(RM) $(OBJS)
