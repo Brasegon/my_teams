@@ -12,18 +12,31 @@
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/socket.h>
+#include <sys/select.h>
 #include <netdb.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <string.h>
 #include <unistd.h>
 #include <ctype.h>
+
+typedef struct client_s {
+    char *ip;
+    int fd;
+    struct client_s *next;
+} client_t;
+
 typedef struct server_s {
     int port;
     int sock_fd_s;
+    int number_cli;
+    struct sockaddr_in clientaddr;
     socklen_t sock_len;
     struct protoent *proto;
     struct sockaddr_in  s_in;
+    fd_set active_fd_set;
+    fd_set read_fd_set;
+    client_t cli[1000];
 } server_t;
 
 void serveur(int port);

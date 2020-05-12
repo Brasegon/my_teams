@@ -6,6 +6,34 @@
 */
 #include "../include/serveur.h"
 
+void create_client(int socket, server_t *srv)
+{
+    socklen_t size = sizeof(srv->clientaddr);
+    srv->cli[srv->number_cli].fd = accept(srv->sock_fd_s,
+        (struct sockaddr *) &srv->clientaddr, &size);
+    srv->cli[srv->number_cli].ip = inet_ntoa(srv->clientaddr.sin_addr);
+    printf("Server: connect from host %s\n", srv->cli[srv->number_cli].ip);
+    FD_SET(srv->cli[srv->number_cli].fd, &srv->active_fd_set);
+    srv->number_cli += 1;
+}
+
+void client_connection(server_t *server, int i)
+{
+    int z = 0;
+    if (FD_ISSET(i, &server->read_fd_set)) {
+        if (i == server->sock_fd_s) {
+            create_client(server->sock_fd_s, server);
+        } else {
+        }
+    }
+}
+
+void initialize_fd(server_t *server)
+{
+    FD_ZERO(&server->active_fd_set);
+    FD_SET(server->sock_fd_s, &server->active_fd_set);
+}
+
 int init_server(server_t *server, int port)
 {
     server->proto = getprotobyname("TCP");
@@ -31,6 +59,19 @@ void serveur(int port)
 {
     server_t server;
 
+    server.number_cli = 0;
+
     if (init_server(&server, port) == -1)
         exit(84);
+    initialize_fd(&server);
+    while (1) {
+        server.read_fd_set = server.active_fd_set;
+        if (select(FD_SETSIZE, &server.read_fd_set, NULL, NULL, NULL) < 0) {
+            perror ("select");
+            exit (EXIT_FAILURE);
+        }
+        for (int i = 0; i < FD_SETSIZE; i++) {
+            client_connection(&server, i);
+        }
+    }
 }
