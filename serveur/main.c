@@ -14,10 +14,11 @@ void print_usage(void)
 
 int main(int ac, char **av)
 {
-    if (ac == 3) {
-        return (0);
-    } else if (ac == 2 && strcmp(av[1], "-help") == 0) {
+    if (ac == 2) {
+        if (strcmp(av[1], "-help") == 0) {
             print_usage();
+        }
+        serveur(atoi(av[1]));
         return (0);
     } else
         return (84);

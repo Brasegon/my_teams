@@ -1,21 +1,15 @@
-##
-## EPITECH PROJECT, 2020
-## NWP_myteams_2019 [WSL: Debian]
-## File description:
-## Makefile
-##
-
 NAME	= myteams_server
 
 CC	= gcc
 
 RM	= rm -f
 
-SRCS	= ./main.c
+SRCS	= ./main.c \
+	  ./src/server.c 
 
 OBJS	= $(SRCS:.c=.o)
 
-CFLAGS = -I
+CFLAGS = -I ./include/
 CFLAGS += -Wall -Wextra
 
 all: $(NAME)
