@@ -5,7 +5,6 @@
 ** commands
 */
 #include "../include/serveur.h"
-#include "../include/logging_server.h"
 
 const command_t commands[] = {
     {"/login", &login},
@@ -18,7 +17,10 @@ void launch_command(char **tab, server_t *srv, int z)
         dprintf(srv->cli[z].fd, "404 Command not found\n");
     }
     for (int i = 0; commands[i].name != NULL; i += 1) {
-        return;
+        if (strcmp(tab[0], commands[i].name) == 0) {
+            (commands[i].func)(tab, &srv->cli[z]);
+            return;
+        }
     }
     dprintf(srv->cli[z].fd, "404 Command not found\n");
 }
@@ -35,7 +37,6 @@ void check_quit(int i, server_t *srv, int z, char *buffer)
     } else {
         tab = my_str_to_word_array(buffer);
         launch_command(tab, srv, z);
-        printf("%s\n", tab[0]);
     }
 }
 

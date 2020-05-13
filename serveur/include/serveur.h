@@ -19,13 +19,15 @@
 #include <string.h>
 #include <unistd.h>
 #include <ctype.h>
+#include <uuid/uuid.h>
+#include "logging_server.h"
 
 
 typedef struct client_s {
     char *ip;
     int fd;
-    char *uuid;
-    char *username;
+    char uuid[37];
+    char username[32];
     int is_login;
     struct client_s *next;
 } client_t;

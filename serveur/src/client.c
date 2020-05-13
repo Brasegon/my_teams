@@ -15,7 +15,6 @@ void create_client(server_t *srv)
             srv->cli[i].fd = accept(srv->sock_fd_s,
                 (struct sockaddr *) &srv->clientaddr, &size);
             srv->cli[i].ip = inet_ntoa(srv->clientaddr.sin_addr);
-            printf("Server: user from %s\n", srv->cli[i].ip);
             FD_SET(srv->cli[i].fd, &srv->active_fd_set);
             break;
         }
