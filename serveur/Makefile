@@ -6,6 +6,8 @@ RM	= rm -f
 
 SRCS	= ./main.c \
 	  ./src/client.c \
+	  ./src/commands/create.c \
+	  ./src/commands/create_teams.c \
 	  ./src/commands/login.c \
 	  ./src/commands/logout.c \
 	  ./src/commands.c \

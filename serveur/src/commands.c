@@ -9,6 +9,7 @@
 const command_t commands[] = {
     {"/login", &login},
     {"/logout", &logout},
+    {"/create", &create},
     {NULL, NULL}
 };
 

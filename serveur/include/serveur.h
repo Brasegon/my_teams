@@ -26,6 +26,7 @@
 typedef struct client_s {
     char *ip;
     int fd;
+    int use_mode;
     char uuid[37];
     char username[32];
     int is_login;
@@ -61,4 +62,6 @@ int count_tab(char **tab);
 
 void login(char **tab, client_t *clt);
 void logout(char **tab, client_t *client);
+void create(char **tab, client_t *client);
+void create_teams(char **tab, client_t *client);
 #endif /* !CLIENT_H_ */
