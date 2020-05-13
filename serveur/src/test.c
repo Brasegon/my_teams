@@ -46,7 +46,7 @@ static int word_len(char const *str, int k)
     return (len);
 }
 
-int print_tab(char **tab)
+int count_tab(char **tab)
 {
     int i = 0;
 

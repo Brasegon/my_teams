@@ -30,6 +30,13 @@ typedef struct client_s {
     struct client_s *next;
 } client_t;
 
+typedef struct command
+{
+    char *name;
+    void (*func)(char **tab, client_t *clt);
+} command_t;
+
+extern const command_t commands[];
 typedef struct server_s {
     int port;
     int sock_fd_s;
@@ -43,15 +50,12 @@ typedef struct server_s {
     client_t cli[1000];
 } server_t;
 
-typedef struct command
-{
-    char *name;
-    void (*func)(char **tab, client_t *cli);
-} command_t;
-
 void serveur(int port);
 void create_client(server_t *srv);
 void client_connection(server_t *server, int i);
 char **my_str_to_word_array(char const *str);
 void check_commands(server_t *srv, int fd_cli);
+int count_tab(char **tab);
+
+void login(char **tab, client_t *clt);
 #endif /* !CLIENT_H_ */
