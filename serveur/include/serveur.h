@@ -60,4 +60,5 @@ void check_commands(server_t *srv, int fd_cli);
 int count_tab(char **tab);
 
 void login(char **tab, client_t *clt);
+void logout(char **tab, client_t *client);
 #endif /* !CLIENT_H_ */

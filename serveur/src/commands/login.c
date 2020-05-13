@@ -11,7 +11,7 @@ void connect_login(char **tab, client_t *client)
     strcpy(client->username, tab[0]);
     strcpy(client->uuid, tab[1]);
     client->is_login = 1;
-    server_event_user_logged_in(client->username);
+    server_event_user_logged_in(client->uuid);
 }
 
 void create_new_login(char *user, client_t *client)
@@ -20,9 +20,10 @@ void create_new_login(char *user, client_t *client)
 
     uuid_generate_random(binuuid);
     uuid_unparse_upper(binuuid, client->uuid);
-    client->is_login = 0;
+    client->is_login = 1;
     strcpy(client->username, user);
-    server_event_user_logged_in(client->username);
+    server_event_user_created(client->uuid, client->username);
+    server_event_user_logged_in(client->uuid);
 }
 
 void check_user_exist(char *user, client_t *client)
