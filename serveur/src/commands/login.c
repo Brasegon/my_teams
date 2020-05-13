@@ -37,6 +37,7 @@ void check_user_exist(char *user, client_t *client)
         tab = my_str_to_word_array(line);
         if (strcmp(tab[0], user) == 0) {
             connect_login(tab, client);
+            // send(client->fd, line, 256, 0);
             fclose(login);
             return;
         }
