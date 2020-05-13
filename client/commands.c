@@ -23,5 +23,6 @@ s_commands t_commands[] =
     {"/unsubscribe"},
     {"/create"},
     {"/list"},
-    {"/info"}
+    {"/info"},
+    {NULL, NULL}
 };

@@ -47,4 +47,7 @@ int readFromServer(t_client *c, int fd, char *buff);
 int loop(t_client *c);
 char *prompt(void);
 
+//! Commands List
+// log.c (Contient Login et Logout)
+
 #endif /* !CLIENT_H_ */
