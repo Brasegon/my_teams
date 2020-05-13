@@ -33,6 +33,11 @@ typedef struct s_client
     int socketFd;
 }t_client;
 
+typedef struct s_commands
+{
+    char *command;
+}t_commands;
+
 // init.c
 void errorHandling(char *str);
 int initClient(t_client *c);
