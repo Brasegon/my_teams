@@ -13,6 +13,8 @@ RM	= rm -f
 
 SRCS	= ./main.c \
 			./input.c \
+			./commands/log.c \
+			./commands.c \
 			./init.c
 
 OBJS	= $(SRCS:.c=.o)

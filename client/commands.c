@@ -8,9 +8,9 @@
 #include "include/client.h"
 #include "include/commands.h"
 
-s_commands t_commands[] =
+const t_commands commands[] =
 {
-    {"/login"},
+    {"/login", &login},
     {"logout"},
     {"/use"},
     {"/help"},
@@ -26,3 +26,8 @@ s_commands t_commands[] =
     {"/info"},
     {NULL, NULL}
 };
+
+void sendMessage(int fd, char *message)
+{
+    dprintf(fd, "%s", message);
+}

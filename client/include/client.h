@@ -36,18 +36,26 @@ typedef struct s_client
 typedef struct s_commands
 {
     char *command;
+    void (*func)(char *str, int fd);
 }t_commands;
+
+extern const t_commands commands[];
 
 // init.c
 void errorHandling(char *str);
 int initClient(t_client *c);
 int readFromServer(t_client *c, int fd, char *buff);
 
-//input.c
+// commands.c
+void sendMessage(int fd, char *message);
+
+// input.c
+void socketHandler(t_client *c, fd_set read, fd_set write);
 int loop(t_client *c);
 char *prompt(void);
 
 //! Commands List
 // log.c (Contient Login et Logout)
-
+void login(char *str); // Login
+char *logout(char *str); // Logout 
 #endif /* !CLIENT_H_ */
