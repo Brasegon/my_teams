@@ -6,6 +6,20 @@
 */
 #include "../include/serveur.h"
 
+void init_user(void)
+{
+    char line[256];
+    char **tab;
+
+    FILE *login = fopen("save/login.txt", "a+");
+
+    while (fgets(line, sizeof(line), login) != NULL) {
+        tab = my_str_to_word_array(line);
+        server_event_user_loaded(tab[1], tab[0]);
+    }
+    fclose(login);
+}
+
 void initialize_fd(server_t *server)
 {
     FD_ZERO(&server->active_fd_set);
@@ -30,6 +44,7 @@ int init_server(server_t *server, int port)
             dprintf(2, "Port is invalid\n");
             return (-1);
     }
+    init_user();
     return (0);
 }
 
