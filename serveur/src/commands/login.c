@@ -37,7 +37,7 @@ void check_user_exist(char *user, client_t *client)
         tab = my_str_to_word_array(line);
         if (strcmp(tab[0], user) == 0) {
             connect_login(tab, client);
-            // send(client->fd, line, 256, 0);
+            send(client->fd, line, 256, 0);
             fclose(login);
             return;
         }
@@ -47,7 +47,7 @@ void check_user_exist(char *user, client_t *client)
     fclose(login);
 }
 
-void login(char **tab, client_t *client)
+void login(char **tab, client_t *client, server_t *srv)
 {
     if (client->is_login == 0) {
         if (count_tab(tab) < 2) {
@@ -55,6 +55,10 @@ void login(char **tab, client_t *client)
             return;
         }
         check_user_exist(tab[1], client);
+        for (int i = 0; i < 1000; i += 1) {
+            (srv->cli[i].uuid != -1) ? dprintf(srv->cli[i].fd,
+            "CONNECT %s %s", client->uuid, client->username) : 0;
+        }
         return;
     }
     dprintf(client->fd, "101 You are already connected\n");

@@ -6,7 +6,7 @@
 */
 #include "../../include/serveur.h"
 
-void create(char **tab, client_t *client)
+void create(char **tab, client_t *client, server_t *srv)
 {
     if (client->is_login != 0) {
         if (count_tab(tab) < 3)

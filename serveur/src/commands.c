@@ -10,6 +10,7 @@ const command_t commands[] = {
     {"/login", &login},
     {"/logout", &logout},
     {"/create", &create},
+    {"/send", &send_mp},
     {NULL, NULL}
 };
 
@@ -20,7 +21,7 @@ void launch_command(char **tab, server_t *srv, int z)
     }
     for (int i = 0; commands[i].name != NULL; i += 1) {
         if (strcmp(tab[0], commands[i].name) == 0) {
-            (commands[i].func)(tab, &srv->cli[z]);
+            (commands[i].func)(tab, &srv->cli[z], srv);
             return;
         }
     }
@@ -49,6 +50,7 @@ void check_commands(server_t *srv, int fd_cli)
     for (int z = 0; z < 1000; z += 1) {
         if (fd_cli == srv->cli[z].fd) {
             check_quit(i, srv, z, buffer);
+            break;
         }
     }
 }

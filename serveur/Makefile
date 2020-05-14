@@ -12,7 +12,8 @@ SRCS	= ./main.c \
 	  ./src/commands/logout.c \
 	  ./src/commands.c \
 	  ./src/server.c \
-	  ./src/test.c 
+	  ./src/test.c \
+	  ./src/commands/send.c
 
 OBJS	= $(SRCS:.c=.o)
 
