@@ -31,12 +31,13 @@ typedef struct s_client
     char *ip;
     short port;
     int socketFd;
+    int fd;
 }t_client;
 
 typedef struct s_commands
 {
     char *command;
-    void (*func)(char *str, int fd);
+    void (*func)(char **tab, int fd);
 }t_commands;
 
 extern const t_commands commands[];
