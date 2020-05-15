@@ -7,11 +7,13 @@
 
 #include "../include/client.h"
 
-void login(int fd, char *str)
+void login(char **tab, int fd)
 {
-    if (str != NULL) {
-        sendMessage(fd, str);
+    if (tab[1] != NULL) {
+        sendMessage(fd, tab[1]);
         printf("[CLIENT] Sending login informations....");
+    } else {
+        printf("Please provide an username. (/login [name])\n");
     }
 }
 

@@ -49,6 +49,8 @@ int readFromServer(t_client *c, int fd, char *buff);
 
 // commands.c
 void sendMessage(int fd, char *message);
+int countTab(char **tab);
+void launchCommand(char **tab, t_client *c);
 
 // input.c
 void socketHandler(t_client *c, fd_set read, fd_set write);
@@ -56,7 +58,10 @@ int loop(t_client *c);
 char *prompt(void);
 
 //! Commands List
-// log.c (Contient Login et Logout)
+
+//! log.c (Contient /login et /logout)
 void login(char *str); // Login
 char *logout(char *str); // Logout 
+
+//! help.c (Contient /help)
 #endif /* !CLIENT_H_ */

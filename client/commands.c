@@ -11,9 +11,9 @@
 const t_commands commands[] =
 {
     {"/login", &login},
-    {"logout"},
+    {"logout", &logout},
     {"/use"},
-    {"/help"},
+    {"/help", &help},
     {"/users"},
     {"/user"},
     {"/send"},
