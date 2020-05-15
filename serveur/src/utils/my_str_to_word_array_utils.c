@@ -7,7 +7,17 @@
 
 #include "../../include/serveur.h"
 
-void check_gui(char const *str, int *i)
+void check_gui(char const *str, int *i, int *words)
+{
+    if (str[*i] == '"') {
+        *i += 1;
+        for (; str[*i] != '"'; *i += 1);
+        *i += 1;
+        *words += 1;
+    }
+}
+
+void check_gui2(char const *str, int *i)
 {
     if (str[*i] == '"') {
         *i += 1;

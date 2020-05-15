@@ -74,6 +74,7 @@ void create(char **tab, client_t *client, server_t *srv);
 void create_teams(char **tab, client_t *client);
 void send_mp(char **tab, client_t *client, server_t *srv);
 void create_channels(char **tab, client_t *client);
-void check_gui(char const *str, int *i);
+void check_gui(char const *str, int *i, int *words);
+void check_gui2(char const *str, int *i);
 char *add_char_gui(char *array, char const *str, int *a, int *k);
 #endif /* !CLIENT_H_ */

@@ -24,7 +24,7 @@ static int nb_words(char const *str)
     int i = 0;
     int words = 0;
     while (str[i] != '\0') {
-        check_gui(str, &i);
+        check_gui(str, &i, &words);
         if (is_alphanum(str[i]) == 1)
             words += 1;
         while (is_alphanum(str[i]) == 1 && str[i] != '\0')
@@ -39,7 +39,7 @@ static int word_len(char const *str, int k)
 {
     int z = 0;
     while (str[k] != '\0') {
-        check_gui(str, &k);
+        check_gui2(str, &k);
         if (is_alphanum(str[k]) != 1)
                 return (z);
         z += 1;
@@ -65,8 +65,3 @@ char **my_str_to_word_array(char const *str)
     array[i] = NULL;
     return (array);
 }
-
-// int main()
-// {
-//     char **tab = my_str_to_word_array("\"Salut je\" suis la");
-// }
