@@ -11,6 +11,7 @@ void connect_login(char **tab, client_t *client)
     strcpy(client->username, tab[0]);
     strcpy(client->uuid, tab[1]);
     client->is_login = 1;
+    client->use_mode = 1;
     server_event_user_logged_in(client->uuid);
 }
 
@@ -21,6 +22,7 @@ void create_new_login(char *user, client_t *client)
     uuid_generate_random(binuuid);
     uuid_unparse_upper(binuuid, client->uuid);
     client->is_login = 1;
+    client->use_mode = 1;
     strcpy(client->username, user);
     server_event_user_created(client->uuid, client->username);
     server_event_user_logged_in(client->uuid);
@@ -37,12 +39,15 @@ void check_user_exist(char *user, client_t *client)
         tab = my_str_to_word_array(line);
         if (strcmp(tab[0], user) == 0) {
             connect_login(tab, client);
-            send(client->fd, line, 256, 0);
+            dprintf(client->fd,
+            "501 %s %s\n", client->uuid, client->username);
             fclose(login);
             return;
         }
     }
     create_new_login(user, client);
+    dprintf(client->fd,
+            "501 %s %s\n", client->uuid, client->username);
     fprintf(login, "%s %s\n", client->username, client->uuid);
     fclose(login);
 }
@@ -56,8 +61,8 @@ void login(char **tab, client_t *client, server_t *srv)
         }
         check_user_exist(tab[1], client);
         for (int i = 0; i < 1000; i += 1) {
-            (srv->cli[i].uuid != -1) ? dprintf(srv->cli[i].fd,
-            "CONNECT %s %s", client->uuid, client->username) : 0;
+            (srv->cli[i].uuid != client->uuid) ? dprintf(srv->cli[i].fd,
+            "701 %s %s\n", client->uuid, client->username) : 0;
         }
         return;
     }

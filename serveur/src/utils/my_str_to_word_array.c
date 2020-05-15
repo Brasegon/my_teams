@@ -4,14 +4,14 @@
 ** File description:
 ** test
 */
-#include "../include/serveur.h"
+#include "../../include/serveur.h"
 
 #include <unistd.h>
 #include <stdlib.h>
 
 static int is_alphanum(char c)
 {
-    if ((c >= '0' && c <= '9') || c == '/' || c == '-')
+    if ((c >= '0' && c <= '9') || c == '"' || c == '-' || c == '/')
         return (1);
     else if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
         return (1);
@@ -23,8 +23,8 @@ static int nb_words(char const *str)
 {
     int i = 0;
     int words = 0;
-
     while (str[i] != '\0') {
+        check_gui(str, &i);
         if (is_alphanum(str[i]) == 1)
             words += 1;
         while (is_alphanum(str[i]) == 1 && str[i] != '\0')
@@ -37,45 +37,36 @@ static int nb_words(char const *str)
 
 static int word_len(char const *str, int k)
 {
-    int len = 0;
-
-    while (is_alphanum(str[k]) == 1) {
-        k += 1;
-        len += 1;
+    int z = 0;
+    while (str[k] != '\0') {
+        check_gui(str, &k);
+        if (is_alphanum(str[k]) != 1)
+                return (z);
+        z += 1;
+        k++;
     }
-    return (len);
-}
-
-int count_tab(char **tab)
-{
-    int i = 0;
-
-    while (tab[i]) {
-        i++;
-    }
-    return (i);
+    return (z);
 }
 
 char **my_str_to_word_array(char const *str)
 {
     char **array = malloc(sizeof(char *) * (nb_words(str) + 1));
     int i = 0;
-    int k = 0;
-    int a = 0;
-
-    while (i != nb_words(str)) {
+    int c = 0;
+    for (int k = 0, a = 0; i != nb_words(str); i += 1) {
         a = 0;
-        while (is_alphanum(str[k]) == 0)
-            k += 1;
+        for (;is_alphanum(str[k]) == 0; k += 1);
         array[i] = malloc(sizeof(char) * (word_len(str, k) + 1));
-        while (is_alphanum(str[k]) == 1) {
+        array[i] = add_char_gui(array[i], str, &a, &k);
+        for (;is_alphanum(str[k]) == 1; a += 1, k += 1)
             array[i][a] = str[k];
-            a += 1;
-            k += 1;
-        }
         array[i][a] = '\0';
-        i += 1;
     }
     array[i] = NULL;
     return (array);
 }
+
+// int main()
+// {
+//     char **tab = my_str_to_word_array("\"Salut je\" suis la");
+// }

@@ -6,6 +6,16 @@
 */
 #include "../include/serveur.h"
 
+int count_tab(char **tab)
+{
+    int i = 0;
+
+    while (tab[i]) {
+        i++;
+    }
+    return (i);
+}
+
 void init_user(void)
 {
     char line[256];

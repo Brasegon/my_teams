@@ -14,5 +14,8 @@ void create(char **tab, client_t *client, server_t *srv)
         if (client->use_mode == 0) {
             create_teams(tab, client);
         }
+        if (client->use_mode == 1) {
+            create_channels(tab, client);
+        }
     }
 }

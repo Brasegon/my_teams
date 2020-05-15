@@ -10,5 +10,6 @@
 void send_mp(char **tab, client_t *client, server_t *srv)
 {
     for (int i = 0; i < 1000; i += 1) {
+        // if (tab[])
     }
 }

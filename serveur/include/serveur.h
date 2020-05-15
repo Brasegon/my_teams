@@ -29,8 +29,9 @@ typedef struct client_s {
     int use_mode;
     char uuid[37];
     char username[32];
+    char teams_uuid[37];
+    char teams_name[32];
     int is_login;
-    struct client_s *next;
 } client_t;
 
 
@@ -46,6 +47,12 @@ typedef struct server_s {
     fd_set read_fd_set;
     client_t cli[1000];
 } server_t;
+
+typedef struct s_test {
+    int a;
+    int b;
+    int c;
+} t_test;
 
 typedef struct command
 {
@@ -66,4 +73,7 @@ void logout(char **tab, client_t *client, server_t *srv);
 void create(char **tab, client_t *client, server_t *srv);
 void create_teams(char **tab, client_t *client);
 void send_mp(char **tab, client_t *client, server_t *srv);
+void create_channels(char **tab, client_t *client);
+void check_gui(char const *str, int *i);
+char *add_char_gui(char *array, char const *str, int *a, int *k);
 #endif /* !CLIENT_H_ */

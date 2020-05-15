@@ -8,11 +8,13 @@ SRCS	= ./main.c \
 	  ./src/client.c \
 	  ./src/commands/create.c \
 	  ./src/commands/create_teams.c \
+	  ./src/commands/create_channel.c \
 	  ./src/commands/login.c \
 	  ./src/commands/logout.c \
 	  ./src/commands.c \
 	  ./src/server.c \
-	  ./src/test.c \
+	  ./src/utils/my_str_to_word_array.c \
+	  ./src/utils/my_str_to_word_array_utils.c \
 	  ./src/commands/send.c
 
 OBJS	= $(SRCS:.c=.o)
