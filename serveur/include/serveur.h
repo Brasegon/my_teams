@@ -20,7 +20,7 @@
 #include <unistd.h>
 #include <ctype.h>
 #include <uuid/uuid.h>
-#include "logging_server.h"
+#include "../../libs/myteams/logging_server.h"
 
 
 typedef struct client_s {
@@ -77,4 +77,5 @@ void create_channels(char **tab, client_t *client);
 void check_gui(char const *str, int *i, int *words);
 void check_gui2(char const *str, int *i);
 char *add_char_gui(char *array, char const *str, int *a, int *k);
+void use(char **tab, client_t *client, server_t *srv);
 #endif /* !CLIENT_H_ */

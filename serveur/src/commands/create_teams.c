@@ -14,7 +14,7 @@ void create_teams(char **tab, client_t *client)
 
     uuid_generate_random(binuuid);
     uuid_unparse_upper(binuuid, uuid);
-    fprintf(teams, "%s %s %s\n", uuid, tab[1], tab[2]);
+    fprintf(teams, "%s %s \"%s\"\n", uuid, tab[1], tab[2]);
     server_event_team_created(uuid, tab[1], client->uuid);
     fclose(teams);
 }

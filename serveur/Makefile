@@ -7,6 +7,7 @@ RM	= rm -f
 SRCS	= ./main.c \
 	  ./src/client.c \
 	  ./src/commands/create.c \
+	  ./src/commands/use.c \
 	  ./src/commands/create_teams.c \
 	  ./src/commands/create_channel.c \
 	  ./src/commands/login.c \
@@ -25,7 +26,7 @@ CFLAGS += -Wall -Wextra
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	 $(CC) $(OBJS) -o $(NAME) $(LDFLAGS) libmyteams.so -luuid
+	 $(CC) $(OBJS) -o $(NAME) $(LDFLAGS) ../libs/myteams/libmyteams.so -luuid
 
 clean:
 	$(RM) $(OBJS)

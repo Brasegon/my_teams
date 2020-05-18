@@ -5,12 +5,14 @@
 ** commands
 */
 #include "../include/serveur.h"
+#include <ctype.h>
 
 const command_t commands[] = {
     {"/login", &login},
     {"/logout", &logout},
     {"/create", &create},
     {"/send", &send_mp},
+    {"/use", &use},
     {NULL, NULL}
 };
 
@@ -50,6 +52,8 @@ void check_commands(server_t *srv, int fd_cli)
     char buffer[256];
     memset(buffer, 0, 256);
     int i = recv(fd_cli, buffer, 256, 0);
+
+    printf("%c\n", buffer[0]);
     for (int z = 0; z < 1000; z += 1) {
         if (fd_cli == srv->cli[z].fd) {
             check_quit(i, srv, z, buffer);
