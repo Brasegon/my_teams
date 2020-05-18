@@ -34,10 +34,6 @@ typedef struct client_s {
     int is_login;
 } client_t;
 
-typedef struct msg_s {
-    char *msg[256];
-} msg_t;
-
 typedef struct server_s {
     int port;
     int sock_fd_s;
@@ -50,7 +46,6 @@ typedef struct server_s {
     fd_set read_fd_set;
     client_t cli[1000];
     t_list *queue;
-    msg_t msg;
 } server_t;
 
 typedef struct s_test {
@@ -83,4 +78,5 @@ void check_gui(char const *str, int *i, int *words);
 void check_gui2(char const *str, int *i);
 char *add_char_gui(char *array, char const *str, int *a, int *k);
 void use(char **tab, client_t *client, server_t *srv);
+t_list *send_queue(t_list *list);
 #endif /* !CLIENT_H_ */

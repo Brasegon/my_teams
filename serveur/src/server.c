@@ -61,7 +61,7 @@ int init_server(server_t *server, int port)
 void serveur(int port)
 {
     server_t server;
-    server.queue = create_list("**BEGIN**", NULL);
+    server.queue = create_list("**BEGIN**", 0, NULL);
     server.number_cli = 0;
     for (int i = 0; i < 1000; i += 1)
         server.cli[i].fd = -1;
@@ -77,5 +77,8 @@ void serveur(int port)
         for (int i = 0; i < FD_SETSIZE; i++) {
             client_connection(&server, i);
         }
+        server.queue = send_queue(server.queue);
+        server.queue->destroy(server.queue);
+        server.queue = create_list("**BEGIN**", 0, NULL);
     }
 }

@@ -7,6 +7,22 @@
 
 #include "../include/serveur.h"
 
+t_list *send_queue(t_list *list)
+{
+    t_list *tmp = list;
+    int i = 0;
+    
+    while (tmp) {
+        if (strcmp(tmp->msg, "**BEGIN**") == 0) {
+            tmp = tmp->next;
+        } else {
+            dprintf(tmp->fd, "%s", tmp->msg);
+            tmp = tmp->next;
+        }
+    }
+    return (list);
+}
+
 void create_client(server_t *srv)
 {
     for (int i = 0; i < 1000; i += 1) {
