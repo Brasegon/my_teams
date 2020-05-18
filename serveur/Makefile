@@ -1,3 +1,10 @@
+##
+## EPITECH PROJECT, 2020
+## NWP_myteams_2019 [WSL: Debian]
+## File description:
+## Makefile
+##
+
 NAME	= myteams_server
 
 CC	= gcc
@@ -16,7 +23,10 @@ SRCS	= ./main.c \
 	  ./src/server.c \
 	  ./src/utils/my_str_to_word_array.c \
 	  ./src/utils/my_str_to_word_array_utils.c \
-	  ./src/commands/send.c
+	  ./src/commands/send.c \
+	  ../common/list.c \
+	  ../common/create_list.c \
+	  ../common/pop_push.c
 
 OBJS	= $(SRCS:.c=.o)
 

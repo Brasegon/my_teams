@@ -21,7 +21,7 @@
 #include <ctype.h>
 #include <uuid/uuid.h>
 #include "../../libs/myteams/logging_server.h"
-
+#include "../../common/list.h"
 
 typedef struct client_s {
     char *ip;
@@ -34,6 +34,9 @@ typedef struct client_s {
     int is_login;
 } client_t;
 
+typedef struct msg_s {
+    char *msg[256];
+} msg_t;
 
 typedef struct server_s {
     int port;
@@ -46,6 +49,8 @@ typedef struct server_s {
     fd_set active_fd_set;
     fd_set read_fd_set;
     client_t cli[1000];
+    t_list *queue;
+    msg_t msg;
 } server_t;
 
 typedef struct s_test {

@@ -28,7 +28,7 @@ void create_new_login(char *user, client_t *client)
     server_event_user_logged_in(client->uuid);
 }
 
-void check_user_exist(char *user, client_t *client)
+void check_user_exist(char *user, client_t *client, server_t *srv)
 {
     char line[256];
     char **tab;
@@ -39,6 +39,8 @@ void check_user_exist(char *user, client_t *client)
         tab = my_str_to_word_array(line);
         if (strcmp(tab[0], user) == 0) {
             connect_login(tab, client);
+            srv->queue = srv->queue->push_back(srv->queue, "Salut je suis la");
+            printf("%s\n", srv->queue->msg);
             dprintf(client->fd,
             "501 %s %s\n", client->uuid, client->username);
             fclose(login);
@@ -59,7 +61,7 @@ void login(char **tab, client_t *client, server_t *srv)
             dprintf(client->fd, "100 Please enter a name\n");
             return;
         }
-        check_user_exist(tab[1], client);
+        check_user_exist(tab[1], client, srv);
         for (int i = 0; i < 1000; i += 1) {
             (srv->cli[i].uuid != client->uuid) ? dprintf(srv->cli[i].fd,
             "701 %s %s\n", client->uuid, client->username) : 0;
