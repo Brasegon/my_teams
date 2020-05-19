@@ -6,24 +6,12 @@
 */
 
 #include "include/client.h"
-#include "include/commands.h"
+// #include "include/commands.h"
 
 const t_commands commands[] =
 {
     {"/login", &login},
-    {"logout", &logout},
-    {"/use"},
-    {"/help", &help},
-    {"/users"},
-    {"/user"},
-    {"/send"},
-    {"/messages"},
-    {"/subscribed"},
-    {"/subscribe"},
-    {"/unsubscribe"},
-    {"/create"},
-    {"/list"},
-    {"/info"},
+    {"/logout", &logout},
     {NULL, NULL}
 };
 
@@ -42,8 +30,8 @@ int countTab(char **tab)
 
 void launchCommand(char **tab, t_client *c)
 {
-    for (int i = 0; commands[i].name != NULL; i++) {
-        if strcmp((tab[0], commands[i].name) == 0) {
+    for (int i = 0; commands[i].command != NULL; i++) {
+        if (strcmp(tab[0], commands[i].command) == 0) {
             (commands[i].func)(tab, c->fd);
             return;
         }

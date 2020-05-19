@@ -11,7 +11,7 @@ t_list *send_queue(t_list *list)
 {
     t_list *tmp = list;
     int i = 0;
-    
+
     while (tmp) {
         if (strcmp(tmp->msg, "**BEGIN**") == 0) {
             tmp = tmp->next;

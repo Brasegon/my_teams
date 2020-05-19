@@ -17,7 +17,7 @@ void login(char **tab, int fd)
     }
 }
 
-char *logout(char *str)
+void logout(char **tab, int fd)
 {
     
 }

@@ -5,7 +5,17 @@
 ** my_str_to_word_array_utils
 */
 
-#include "../../include/serveur.h"
+#include "list.h"
+
+int count_tab(char **tab)
+{
+    int i = 0;
+
+    while (tab[i]) {
+        i++;
+    }
+    return (i);
+}
 
 void check_gui(char const *str, int *i, int *words)
 {

@@ -25,9 +25,9 @@ int initClient(t_client *c)
     serv_addr.sin_port = htons(c->port);
     if (inet_pton(AF_INET, c->ip, &serv_addr.sin_addr) < 1)
         errorHandling("IP Error");
-    if (connect(c->socketFd, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0)
+    if (connect(c->socketFd,
+    (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0)
         errorHandling("Connection Error");
-    readFromServer(c, c->socketFd, buff);
     return (0);
 }
 

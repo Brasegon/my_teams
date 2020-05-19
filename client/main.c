@@ -29,6 +29,7 @@ int main(int ac, char **av)
     client->ip = av[1];
     client->port = atoi(av[2]);
     initClient(client);
+    loop(client);
     free(client);
     return (0);
 }

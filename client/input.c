@@ -7,27 +7,48 @@
 
 #include "include/client.h"
 
+const t_rfc rfc[] = {
+    {"501", &login_cli},
+    {"502", &logout_cli},
+    {NULL, NULL}
+};
+
+void check_commands(t_client *c)
+{
+    char **tab = my_str_to_word_array(c->buff);
+
+    if (count_tab(tab) < 1)
+        return;
+    for (int i = 0; rfc[i].name != NULL; i += 1) {
+        if (strcmp(tab[0], rfc[i].name) == 0) {
+            (rfc[i].func)(tab, c);
+            return;
+        }
+    }
+}
+
 void socketHandler(t_client *c, fd_set read, fd_set write)
 {
     if (select(4, &read, &write, NULL, NULL) != -1) {
         if (FD_ISSET(0, &read)) {
-            input = prompt();
+            c->input = prompt();
         } if (FD_ISSET(c->socketFd, &read)) {
-            recv(c->socketFd, buff, 256, 0);
-            printf("%s\n", buff);
-            memset(buff, 0, 256);
+            recv(c->socketFd, c->buff, 1024, 0);
+            check_commands(c);
+            memset(c->buff, 0, 1024);
         } if (FD_ISSET(c->socketFd, &write)) {
-            if (input != NULL) {
-                send(c->socketFd, input, 256, 0);
+            if (c->input != NULL) {
+                send(c->socketFd, c->input, 1024, 0);
             }
         }
+    }
+    if (c->input) {
+        c->input = NULL;
     }
 }
 
 int loop(t_client *c)
 {
-    char *input = NULL;
-    char buff[1024] = {0};
     fd_set read;
     fd_set write;
     while (12) {
@@ -38,10 +59,7 @@ int loop(t_client *c)
         FD_SET(c->socketFd, &read);
         FD_SET(c->socketFd, &write);
         socketHandler(c, read, write);
-        if (input)
-            input = NULL;
     }
-    free(input);
     return (0);
 }
 
@@ -50,6 +68,6 @@ char *prompt(void)
     char *line = malloc(sizeof(char) * 1024);
     if (line == NULL)
         errorHandling("Error Malloc Prompt");
-    fgets(line, strlen(line), stdin);
+    read(0, line, 1024);
     return (line);
 }

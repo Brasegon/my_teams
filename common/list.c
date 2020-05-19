@@ -39,10 +39,10 @@ t_list		*insert_at_list(t_list *this, unsigned int n, void *struc)
     if (!this || !(tmp = *this->first))
         return (NULL);
     if (!n)
-        return (push_front_list(this, struc));
+        return (push_front_list(this, struc, 0));
     if (n >= *this->size - 1)
-        return (push_back_list(this, struc));
-    if (!(elem = create_list(struc, this)))
+        return (push_back_list(this, struc, 0));
+    if (!(elem = create_list(struc, 0, this)))
         return (NULL);
     while (tmp && ++i < n - 1)
         if (!(tmp = tmp->next))

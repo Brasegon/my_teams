@@ -6,16 +6,6 @@
 */
 #include "../include/serveur.h"
 
-int count_tab(char **tab)
-{
-    int i = 0;
-
-    while (tab[i]) {
-        i++;
-    }
-    return (i);
-}
-
 void init_user(void)
 {
     char line[256];
@@ -74,9 +64,8 @@ void serveur(int port)
             perror ("select");
             exit (EXIT_FAILURE);
         }
-        for (int i = 0; i < FD_SETSIZE; i++) {
+        for (int i = 0; i < FD_SETSIZE; i++)
             client_connection(&server, i);
-        }
         server.queue = send_queue(server.queue);
         server.queue->destroy(server.queue);
         server.queue = create_list("**BEGIN**", 0, NULL);

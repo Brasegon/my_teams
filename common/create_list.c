@@ -21,7 +21,7 @@ void next_list(t_list *list)
     list->get_size = &get_size_list;
 }
 
-t_list		*create_list(char *message, t_list *old)
+t_list		*create_list(char *message, int fd, t_list *old)
 {
     t_list	*list;
 
@@ -34,6 +34,7 @@ t_list		*create_list(char *message, t_list *old)
     !old ? *list->last = list : 0;
     !old ? *list->size = 1 : 0;
     strcpy(list->msg, message);
+    list->fd = fd;
     list->next = NULL;
     list->prev = NULL;
     next_list(list);

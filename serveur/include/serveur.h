@@ -64,19 +64,14 @@ extern const command_t commands[];
 void serveur(int port);
 void create_client(server_t *srv);
 void client_connection(server_t *server, int i);
-char **my_str_to_word_array(char const *str);
 void check_commands(server_t *srv, int fd_cli);
-int count_tab(char **tab);
 
 void login(char **tab, client_t *clt, server_t *srv);
 void logout(char **tab, client_t *client, server_t *srv);
 void create(char **tab, client_t *client, server_t *srv);
-void create_teams(char **tab, client_t *client);
+void create_teams(char **tab, client_t *client, server_t *srv);
 void send_mp(char **tab, client_t *client, server_t *srv);
-void create_channels(char **tab, client_t *client);
-void check_gui(char const *str, int *i, int *words);
-void check_gui2(char const *str, int *i);
-char *add_char_gui(char *array, char const *str, int *a, int *k);
+void create_channels(char **tab, client_t *client, server_t *srv);
 void use(char **tab, client_t *client, server_t *srv);
 t_list *send_queue(t_list *list);
 #endif /* !CLIENT_H_ */

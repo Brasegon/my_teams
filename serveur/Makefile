@@ -21,8 +21,8 @@ SRCS	= ./main.c \
 	  ./src/commands/logout.c \
 	  ./src/commands.c \
 	  ./src/server.c \
-	  ./src/utils/my_str_to_word_array.c \
-	  ./src/utils/my_str_to_word_array_utils.c \
+	  ../common/my_str_to_word_array.c \
+	  ../common/my_str_to_word_array_utils.c \
 	  ./src/commands/send.c \
 	  ../common/list.c \
 	  ../common/create_list.c \

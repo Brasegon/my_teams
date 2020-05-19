@@ -16,11 +16,11 @@ void		free_content(t_list *list)
     }
 }
 
-t_list		*push_back_list(t_list *this, char *msg)
+t_list		*push_back_list(t_list *this, char *msg, int fd)
 {
     t_list	*elem;
 
-    if (!this || !*this->last || !(elem = create_list(msg, this)))
+    if (!this || !*this->last || !(elem = create_list(msg, fd, this)))
         return (NULL);
     elem->prev = (*this->last);
     (*this->last)->next ? elem->next = (*this->last)->next : 0;
@@ -30,11 +30,11 @@ t_list		*push_back_list(t_list *this, char *msg)
     return ((*this->size)++, *this->first);
 }
 
-t_list		*push_front_list(t_list *this, char *msg)
+t_list		*push_front_list(t_list *this, char *msg, int fd)
 {
     t_list	*elem;
 
-    if (!this || !(elem = create_list(msg, this)))
+    if (!this || !(elem = create_list(msg, fd, this)))
         return (NULL);
     elem->next = *this->first;
     elem->prev = (*this->first)->prev;

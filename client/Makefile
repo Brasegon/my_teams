@@ -15,7 +15,10 @@ SRCS	= ./main.c \
 			./input.c \
 			./commands/log.c \
 			./commands.c \
-			./init.c
+			./init.c \
+			../common/my_str_to_word_array.c \
+	  		../common/my_str_to_word_array_utils.c \
+			./rfc/login_client.c
 
 OBJS	= $(SRCS:.c=.o)
 
@@ -25,7 +28,7 @@ CFLAGS += -Wall -Wextra
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	 $(CC) $(OBJS) -o $(NAME) $(LDFLAGS)
+	 $(CC) $(OBJS) -o $(NAME) $(LDFLAGS) ../libs/myteams/libmyteams.so
 
 clean:
 	$(RM) $(OBJS)

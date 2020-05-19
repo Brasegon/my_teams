@@ -65,7 +65,7 @@ void login(char **tab, client_t *client, server_t *srv)
         for (int i = 0; i < 1000; i += 1) {
             (srv->cli[i].uuid != client->uuid &&
             srv->cli[i].fd != -1) ? sprintf(line,
-            "701 %s %s\n", client->uuid, client->username) : 0;
+            "501 %s %s\n", client->uuid, client->username) : 0;
             srv->queue = (srv->cli[i].uuid != client->uuid &&
             srv->cli[i].fd != -1) ?
             srv->queue->push_back(srv->queue, line, srv->cli[i].fd) :
@@ -73,6 +73,4 @@ void login(char **tab, client_t *client, server_t *srv)
         }
         return;
     }
-    srv->queue = srv->queue->push_back(srv->queue,
-    "101 You are already connected\n", client->fd);
 }

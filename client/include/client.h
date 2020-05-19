@@ -24,7 +24,9 @@
 #include <arpa/inet.h>
 #include <errno.h>
 #include <string.h>
-#include <time.h> 
+#include <time.h>
+#include <sys/select.h>
+#include "../../common/list.h"
 
 typedef struct s_client
 {
@@ -32,8 +34,15 @@ typedef struct s_client
     short port;
     int socketFd;
     int fd;
-}t_client;
+    char buff[1024];
+    char *input;
+} t_client;
 
+typedef struct s_rfc
+{
+    char *name;
+    void (*func)(char **tab, t_client *c);
+}t_rfc;
 typedef struct s_commands
 {
     char *command;
@@ -41,6 +50,7 @@ typedef struct s_commands
 }t_commands;
 
 extern const t_commands commands[];
+extern const t_rfc rfc[];
 
 // init.c
 void errorHandling(char *str);
@@ -51,17 +61,22 @@ int readFromServer(t_client *c, int fd, char *buff);
 void sendMessage(int fd, char *message);
 int countTab(char **tab);
 void launchCommand(char **tab, t_client *c);
+void check_commands(t_client *c);
 
 // input.c
 void socketHandler(t_client *c, fd_set read, fd_set write);
 int loop(t_client *c);
 char *prompt(void);
 
-//! Commands List
+//Commands List
 
-//! log.c (Contient /login et /logout)
-void login(char *str); // Login
-char *logout(char *str); // Logout 
+//log.c (Contient /login et /logout)
+void login(char **tab, int fd); // Login
+void logout(char **tab, int fd); // Logout
 
-//! help.c (Contient /help)
+//help.c (Contient /help)
+
+// rfc
+void login_cli(char **tab, t_client *c);
+void logout_cli(char **tab, t_client *c);
 #endif /* !CLIENT_H_ */
