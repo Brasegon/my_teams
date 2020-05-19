@@ -10,6 +10,7 @@
 const t_rfc rfc[] = {
     {"501", &login_cli},
     {"502", &logout_cli},
+    {"505", &print_users},
     {NULL, NULL}
 };
 

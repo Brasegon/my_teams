@@ -79,4 +79,5 @@ void logout(char **tab, int fd); // Logout
 // rfc
 void login_cli(char **tab, t_client *c);
 void logout_cli(char **tab, t_client *c);
+void print_users(char **tab, t_client *c);
 #endif /* !CLIENT_H_ */

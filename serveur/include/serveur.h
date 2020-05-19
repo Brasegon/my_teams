@@ -73,5 +73,6 @@ void create_teams(char **tab, client_t *client, server_t *srv);
 void send_mp(char **tab, client_t *client, server_t *srv);
 void create_channels(char **tab, client_t *client, server_t *srv);
 void use(char **tab, client_t *client, server_t *srv);
+void users(char **tab, client_t *client, server_t *srv);
 t_list *send_queue(t_list *list);
 #endif /* !CLIENT_H_ */

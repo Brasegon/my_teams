@@ -16,6 +16,8 @@ t_list *send_queue(t_list *list)
         if (strcmp(tmp->msg, "**BEGIN**") == 0) {
             tmp = tmp->next;
         } else {
+            printf("%s", tmp->msg);
+            usleep(1000);
             dprintf(tmp->fd, "%s", tmp->msg);
             tmp = tmp->next;
         }

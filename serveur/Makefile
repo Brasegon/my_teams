@@ -19,6 +19,7 @@ SRCS	= ./main.c \
 	  ./src/commands/create_channel.c \
 	  ./src/commands/login.c \
 	  ./src/commands/logout.c \
+	  ./src/commands/users.c \
 	  ./src/commands.c \
 	  ./src/server.c \
 	  ../common/my_str_to_word_array.c \
