@@ -37,7 +37,7 @@ CFLAGS += -Wall -Wextra
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	 $(CC) $(OBJS) -o $(NAME) $(LDFLAGS) ../libs/myteams/libmyteams.so -luuid
+	 $(CC) $(OBJS) -o $(NAME) $(LDFLAGS)  -luuid
 
 clean:
 	$(RM) $(OBJS)
