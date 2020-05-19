@@ -17,18 +17,18 @@ all: launch
 launch:
 	 make -C serveur/
 	 cp serveur/myteams_server .
-	#  make -C client/
-	#  cp serveur/myteams_cli .
+	 make -C client/
+	 cp client/myteams_cli .
 
 clean:
 	make clean -C serveur/
-	# make clean -C client/
+	make clean -C client/
 
 fclean: clean
 	make fclean -C serveur/
-	# make fclean -C client/
-	rm myteams_server
-	# rm myteams_cli
+	make fclean -C client/
+	rm -f myteams_server
+	rm -f myteams_cli
 
 re: fclean all
 
