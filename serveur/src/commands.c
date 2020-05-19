@@ -14,6 +14,7 @@ const command_t commands[] = {
     {"/send", &send_mp},
     {"/use", &use},
     {"/users", &users},
+    {"/user", &user},
     {NULL, NULL}
 };
 

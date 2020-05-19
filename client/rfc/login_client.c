@@ -6,6 +6,16 @@
 */
 #include "../include/client.h"
 
+void send_mp(char **tab, t_client *c)
+{
+    client_event_private_message_received(tab[1], tab[2]);
+}
+
+void print_user(char **tab, t_client *c)
+{
+    client_print_user(tab[1], tab[2], atoi(tab[3]));
+}
+
 void print_users(char **tab, t_client *c)
 {
     client_print_users(tab[1], tab[2], atoi(tab[3]));

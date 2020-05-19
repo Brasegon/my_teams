@@ -80,4 +80,6 @@ void logout(char **tab, int fd); // Logout
 void login_cli(char **tab, t_client *c);
 void logout_cli(char **tab, t_client *c);
 void print_users(char **tab, t_client *c);
+void print_user(char **tab, t_client *c);
+void send_mp(char **tab, t_client *c);
 #endif /* !CLIENT_H_ */
