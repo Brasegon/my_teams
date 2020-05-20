@@ -13,6 +13,7 @@ const t_rfc rfc[] = {
     {"505", &print_users},
     {"506", &print_user},
     {"507", &send_mp},
+    {"520", &create_teams},
     {NULL, NULL}
 };
 
