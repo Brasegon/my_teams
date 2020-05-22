@@ -78,4 +78,6 @@ void print_users(char **tab, t_client *c);
 void print_user(char **tab, t_client *c);
 void send_mp(char **tab, t_client *c);
 void create_teams(char **tab, t_client *c);
+void error_command(char **tab, t_client *c);
+void error_use(char **tab, t_client *c);
 #endif /* !CLIENT_H_ */

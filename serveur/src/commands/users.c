@@ -24,8 +24,10 @@ void user(char **tab, client_t *client, server_t *srv)
     int connect = 0;
     char **user;
     memset(line, 0, 1024);
-    if (client->is_login == 0)
+    if (client->is_login == 0) {
+        srv->queue = srv->queue->push_front(srv->queue, "101\n", client->fd);
         return;
+    }
     while (fgets(line, sizeof(line), login) != NULL) {
         user = my_str_to_word_array(line);
         connect = check_if_online(tab, srv);

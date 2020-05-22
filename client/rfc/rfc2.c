@@ -11,3 +11,17 @@ void create_teams(char **tab, t_client *c)
 {
     client_event_team_created(tab[1], tab[2], tab[3]);
 }
+
+void error_command(char **tab, t_client *c)
+{
+    client_error_unauthorized();
+}
+
+void error_use(char **tab, t_client *c)
+{
+    if (strcmp(tab[1], "team") == 0) {
+        client_error_unknown_team(tab[2]);
+    } else if (strcmp(tab[1], "channel") == 0) {
+        client_error_unknown_channel(tab[2]);
+    }
+}

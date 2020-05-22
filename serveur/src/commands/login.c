@@ -57,8 +57,8 @@ void login(char **tab, client_t *client, server_t *srv)
     char line[256];
     if (client->is_login == 0) {
         if (count_tab(tab) < 2) {
-            srv->queue = srv->queue->push_back(srv->queue,
-            "100 Please enter a name\n", client->fd);
+            srv->queue = srv->queue->push_front
+            (srv->queue, "101\n", client->fd);
             return;
         }
         check_user_exist(tab[1], client, srv);

@@ -6,10 +6,10 @@
 */
 #include "../../include/serveur.h"
 
-void use_teams(char **tab, client_t *client)
+void use_teams(char **tab, client_t *client, server_t *srv)
 {
     FILE *teams = fopen("save/teams.txt", "a+");
-    char line[256];
+    char line[1024];
     char **file;
     if (tab[1] == NULL) {
         client->use_mode = 0;
@@ -20,11 +20,12 @@ void use_teams(char **tab, client_t *client)
         if (strcmp(tab[1], file[0]) == 0) {
             client->use_mode = 1;
             strcpy(client->teams_uuid, file[0]);
-            dprintf(client->fd, "503 Ok\n");
             return;
         }
     }
-    dprintf(client->fd, "603 Not found\n");
+    sprintf(line, "603 team %s", tab[1]);
+    srv->queue = srv->queue->push_back(srv->queue, line,
+    client->fd);
     fclose(teams);
 }
 
@@ -32,8 +33,8 @@ void use(char **tab, client_t *client, server_t *srv)
 {
     if (client->is_login != 0) {
         (void) srv;
-        use_teams(tab, client);
+        use_teams(tab, client, srv);
         return;
     }
-    dprintf(client->fd, "100 Please loggin in\n");
+    srv->queue = srv->queue->push_front(srv->queue, "101\n", client->fd);
 }

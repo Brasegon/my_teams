@@ -25,4 +25,5 @@ void logout(char **tab, client_t *client, server_t *srv)
         client->is_login = 0;
         return;
     }
+    srv->queue = srv->queue->push_front(srv->queue, "101\n", client->fd);
 }
