@@ -52,7 +52,6 @@ char **my_str_to_word_array(char const *str)
 {
     char **array = malloc(sizeof(char *) * (nb_words(str) + 1));
     int i = 0;
-    int c = 0;
     for (int k = 0, a = 0; i != nb_words(str); i += 1) {
         a = 0;
         for (;is_alphanum(str[k]) == 0; k += 1);

@@ -22,6 +22,7 @@
 #include <time.h>
 #include <sys/select.h>
 #include "../../common/list.h"
+#include "logging_client.h"
 
 typedef struct s_client
 {
@@ -80,4 +81,5 @@ void send_mp(char **tab, t_client *c);
 void create_teams(char **tab, t_client *c);
 void error_command(char **tab, t_client *c);
 void error_use(char **tab, t_client *c);
+void error_user(char **tab, t_client *c);
 #endif /* !CLIENT_H_ */

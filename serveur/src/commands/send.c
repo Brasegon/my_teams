@@ -22,4 +22,7 @@ void send_mp(char **tab, client_t *client, server_t *srv)
             return;
         }
     }
+    sprintf(line, "607 %s\n", tab[1]);
+    srv->queue = srv->queue->push_back(srv->queue, line,
+    client->fd);
 }

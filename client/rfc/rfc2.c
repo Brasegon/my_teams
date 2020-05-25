@@ -17,6 +17,11 @@ void error_command(char **tab, t_client *c)
     client_error_unauthorized();
 }
 
+void error_user(char **tab, t_client *c)
+{
+    client_error_unknown_user(tab[1]);
+}
+
 void error_use(char **tab, t_client *c)
 {
     if (strcmp(tab[1], "team") == 0) {
