@@ -13,7 +13,6 @@ RM	= rm -f
 
 SRCS	= ./main.c \
 			./input.c \
-			./commands/log.c \
 			./commands.c \
 			./init.c \
 			../common/my_str_to_word_array.c \
