@@ -50,7 +50,8 @@ void socketHandler(t_client *c, fd_set read, fd_set write)
     }
     if (c->input) {
         c->input = NULL;
-    }
+    } if (!c->input)
+        free(c->input);
 }
 
 int loop(t_client *c)
@@ -72,8 +73,10 @@ int loop(t_client *c)
 char *prompt(void)
 {
     char *line = malloc(sizeof(char) * 1024);
-    if (line == NULL)
-        errorHandling("Error Malloc Prompt");
-    read(0, line, 1024);
+    int i = read(0, line, 1024);
+    if (i == 0)
+        exit(0);
+    if (i == 1)
+        return (NULL);
     return (line);
 }

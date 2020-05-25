@@ -42,8 +42,6 @@ void check_quit(int i, server_t *srv, int z, char *buffer)
         FD_CLR(srv->cli[z].fd, &srv->active_fd_set);
         srv->cli[z].fd = -1;
     } else {
-        if (strlen(buffer) == 0)
-            return;
         tab = my_str_to_word_array(buffer);
         launch_command(tab, srv, z);
         free(tab);
