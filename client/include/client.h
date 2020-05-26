@@ -86,4 +86,5 @@ void create_teams(char **tab, t_client *c);
 void error_command(char **tab, t_client *c);
 void error_use(char **tab, t_client *c);
 void error_user(char **tab, t_client *c);
+void error_already(char **tab, t_client *c);
 #endif /* !CLIENT_H_ */

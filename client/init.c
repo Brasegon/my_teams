@@ -30,16 +30,3 @@ int initClient(t_client *c)
         errorHandling("Connection Error");
     return (0);
 }
-
-int readFromServer(t_client *c, int fd, char *buff)
-{
-    int readNb = 0;
-    while (readNb = read(fd, buff, sizeof(buff) - 1) > 0) {
-        buff[readNb] = '\0';
-        if (fputs(buff, stdout) == EOF)
-            errorHandling("Fputs error");
-    }
-    if (readNb < 0)
-        errorHandling("Read error");
-    return (0);
-}

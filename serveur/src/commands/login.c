@@ -6,6 +6,18 @@
 */
 #include "../../include/serveur.h"
 
+int check_user_connect(char *user, server_t *srv, client_t *c)
+{
+    for (int i = 0; i < 1000; i += 1) {
+        if (strcmp(user, srv->cli[i].username) == 0) {
+            srv->queue = srv->queue->push_front
+            (srv->queue, "102\n", c->fd);
+            return (1);
+        }
+    }
+    return (0);
+}
+
 void connect_login(char **tab, client_t *client)
 {
     strcpy(client->username, tab[0]);
@@ -33,7 +45,6 @@ void check_user_exist(char *user, client_t *client, server_t *srv)
     char line[256];
     char **tab;
     FILE *login = fopen("save/login.txt", "a+");
-
     memset(line, 0, 256);
     while (fgets(line, sizeof(line), login) != NULL) {
         tab = my_str_to_word_array(line);
@@ -61,6 +72,8 @@ void login(char **tab, client_t *client, server_t *srv)
             (srv->queue, "101\n", client->fd);
             return;
         }
+        if (check_user_connect(tab[1], srv, client) == 1)
+            return;
         check_user_exist(tab[1], client, srv);
         for (int i = 0; i < 1000; i += 1) {
             (srv->cli[i].uuid != client->uuid &&
@@ -71,6 +84,5 @@ void login(char **tab, client_t *client, server_t *srv)
             srv->queue->push_back(srv->queue, line, srv->cli[i].fd) :
             srv->queue;
         }
-        return;
     }
 }
