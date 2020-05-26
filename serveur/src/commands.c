@@ -37,7 +37,6 @@ void check_quit(int i, server_t *srv, int z, char *buffer)
     char **tab = NULL;
 
     if (i < 1) {
-        printf("Déconnection d'un client\n");
         close(srv->cli[z].fd);
         FD_CLR(srv->cli[z].fd, &srv->active_fd_set);
         srv->cli[z].fd = -1;

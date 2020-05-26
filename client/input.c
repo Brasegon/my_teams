@@ -21,12 +21,12 @@ const t_rfc rfc[] = {
     {NULL, NULL}
 };
 
-void check_logout(char *input)
+void check_logout(char *input, t_client *c)
 {
     char **tab = my_str_to_word_array(input);
 
     if (strcmp(tab[0], "/logout") == 0)
-        exit(0);
+        c->is_connect = 1;
 }
 
 void check_commands(t_client *c)
@@ -48,6 +48,7 @@ void socketHandler(t_client *c, fd_set read, fd_set write)
     if (select(4, &read, &write, NULL, NULL) != -1) {
         if (FD_ISSET(0, &read)) {
             c->input = prompt();
+            check_logout(c->input, c);
         } if (FD_ISSET(c->socketFd, &read)) {
             recv(c->socketFd, c->buff, 1024, 0);
             check_commands(c);
@@ -55,7 +56,6 @@ void socketHandler(t_client *c, fd_set read, fd_set write)
         } if (FD_ISSET(c->socketFd, &write)) {
             if (c->input != NULL) {
                 send(c->socketFd, c->input, 1024, 0);
-                check_logout(c->input);
             }
         }
     }

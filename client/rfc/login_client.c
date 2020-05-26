@@ -32,6 +32,7 @@ void login_cli(char **tab, t_client *c)
 
 void logout_cli(char **tab, t_client *c)
 {
-    (void)c;
     client_event_loggedout(tab[1], tab[2]);
+    if (c->is_connect == 1)
+        exit(0);
 }

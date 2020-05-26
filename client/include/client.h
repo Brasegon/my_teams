@@ -32,6 +32,7 @@ typedef struct s_client
 {
     char *ip;
     short port;
+    int is_connect;
     int socketFd;
     int fd;
     char buff[1024];
