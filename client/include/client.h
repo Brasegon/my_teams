@@ -5,6 +5,10 @@
 ** client
 */
 
+#ifndef  READ_SIZE
+#define  READ_SIZE (1)
+#endif  /* !READ_SIZE  */
+
 #ifndef CLIENT_H_
 #define CLIENT_H_
 

@@ -5,30 +5,64 @@
 ## Makefile
 ##
 
+NAME	= myteams_server
+
 CC	= gcc
 
 RM	= rm -f
 
-CFLAGS = -I ./client/include/
+SRCS	= ./serveur/main.c \
+	  ./serveur/src/client.c \
+	  ./serveur/src/commands/create.c \
+	  ./serveur/src/commands/use.c \
+	  ./serveur/src/commands/create_teams.c \
+	  ./serveur/src/commands/create_channel.c \
+	  ./serveur/src/commands/login.c \
+	  ./serveur/src/commands/logout.c \
+	  ./serveur/src/commands/users.c \
+	  ./serveur/src/commands.c \
+	  ./serveur/src/server.c \
+	  ./common/my_str_to_word_array.c \
+	  ./common/my_str_to_word_array_utils.c \
+	  ./serveur/src/commands/send.c \
+	  ./common/list.c \
+	  ./common/create_list.c \
+	  ./common/pop_push.c
+
+OBJS	= $(SRCS:.c=.o)
+
+NAME1	= myteams_cli
+
+SRCS1	= 	./client/main.c \
+			./client/input.c \
+			./client/commands.c \
+			./client/init.c \
+			./common/my_str_to_word_array.c \
+	  		./common/my_str_to_word_array_utils.c \
+			./client/rfc/login_client.c \
+			./client/rfc/rfc2.c
+
+OBJS1	= $(SRCS1:.c=.o)
+
+CFLAGS = -I ./include/
 CFLAGS += -Wall -Wextra
 
-all: launch
 
-launch:
-	 make -C serveur/
-	 cp serveur/myteams_server .
-	 make -C client/
-	 cp client/myteams_cli .
+all: $(NAME) $(NAME1)
+
+$(NAME1): $(OBJS1)
+	 $(CC) $(OBJS1) -o $(NAME1) $(LDFLAGS) -L./libs/myteams -lmyteams
+
+$(NAME): $(OBJS)
+	$(CC) $(OBJS) -o $(NAME) $(LDFLAGS) -luuid -L./libs/myteams -lmyteams
 
 clean:
-	make clean -C serveur/
-	make clean -C client/
+	$(RM) $(OBJS)
+	$(RM) $(OBJS1)
 
 fclean: clean
-	make fclean -C serveur/
-	make fclean -C client/
-	rm -f myteams_server
-	rm -f myteams_cli
+	$(RM) $(NAME)
+	$(RM) $(NAME1)
 
 re: fclean all
 
