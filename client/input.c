@@ -20,6 +20,14 @@ const t_rfc rfc[] = {
     {NULL, NULL}
 };
 
+void check_logout(char *input)
+{
+    char **tab = my_str_to_word_array(input);
+
+    if (strcmp(tab[0], "/logout") == 0)
+        exit(0);
+}
+
 void check_commands(t_client *c)
 {
     char **tab = my_str_to_word_array(c->buff);
@@ -46,6 +54,7 @@ void socketHandler(t_client *c, fd_set read, fd_set write)
         } if (FD_ISSET(c->socketFd, &write)) {
             if (c->input != NULL) {
                 send(c->socketFd, c->input, 1024, 0);
+                check_logout(c->input);
             }
         }
     }
@@ -76,7 +85,7 @@ char *prompt(void)
     char *line = malloc(sizeof(char) * 1024);
     int i = read(0, line, 1024);
     if (i == 0)
-        exit(0);
+        line = strcpy(line, "/logout");
     if (i == 1)
         return (NULL);
     return (line);
