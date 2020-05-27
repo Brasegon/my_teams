@@ -15,7 +15,7 @@ void logout(char **tab, client_t *client, server_t *srv)
         server_event_user_logged_out(client->uuid);
         for (int i = 0; i < 1000; i += 1) {
             sprintf(line,
-            "502 %s %s\n", client->uuid, client->username);
+            "502 %s \"%s\"\n", client->uuid, client->username);
             srv->queue = (srv->cli[i].fd != -1) ?
             srv->queue->push_back(srv->queue, line, srv->cli[i].fd):
             srv->queue;

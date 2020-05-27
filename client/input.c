@@ -15,6 +15,7 @@ const t_rfc rfc[] = {
     {"507", &send_mp},
     {"603", &error_use},
     {"520", &create_teams},
+    {"521", &create_channel},
     {"101", &error_command},
     {"102", &error_already},
     {"607", &error_user},

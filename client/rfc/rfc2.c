@@ -14,12 +14,6 @@ void error_already(char **tab, t_client *c)
     client_error_already_exist();
 }
 
-void create_teams(char **tab, t_client *c)
-{
-    (void)c;
-    client_event_team_created(tab[1], tab[2], tab[3]);
-}
-
 void error_command(char **tab, t_client *c)
 {
     (void)tab;

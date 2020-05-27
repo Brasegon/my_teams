@@ -40,7 +40,8 @@ SRCS1	= 	./client/main.c \
 			./common/my_str_to_word_array.c \
 	  		./common/my_str_to_word_array_utils.c \
 			./client/rfc/login_client.c \
-			./client/rfc/rfc2.c
+			./client/rfc/rfc2.c \
+			./client/rfc/create.c
 
 OBJS1	= $(SRCS1:.c=.o)
 
