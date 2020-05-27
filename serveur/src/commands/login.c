@@ -77,7 +77,7 @@ void login(char **tab, client_t *client, server_t *srv)
         check_user_exist(tab[1], client, srv);
         for (int i = 0; i < 1000; i += 1) {
             (srv->cli[i].uuid != client->uuid &&
-            srv->cli[i].fd != -1) ? sprintf(line,
+            srv->cli[i].fd != -1 && srv->cli[i].is_login == 1) ? sprintf(line,
             "501 %s \"%s\"\n", client->uuid, client->username) : 0;
             srv->queue = (srv->cli[i].uuid != client->uuid &&
             srv->cli[i].fd != -1) ?
