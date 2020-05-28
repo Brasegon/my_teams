@@ -14,7 +14,6 @@ void send_mp(char **tab, client_t *client, server_t *srv)
         srv->queue = srv->queue->push_front(srv->queue, "101\n", client->fd);
         return;
     }
-    printf("%s\n", tab[1]);
     for (int i = 0; i < 1000; i += 1) {
         if (strcmp(tab[1], srv->cli[i].uuid) == 0) {
             sprintf(line, "507 %s \"%s\"\n", client->uuid, tab[2]);

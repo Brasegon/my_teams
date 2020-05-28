@@ -72,8 +72,6 @@ void login(char **tab, client_t *client, server_t *srv)
             (srv->queue, "101\n", client->fd);
             return;
         }
-        if (check_user_connect(tab[1], srv, client) == 1)
-            return;
         check_user_exist(tab[1], client, srv);
         for (int i = 0; i < 1000; i += 1) {
             (srv->cli[i].uuid != client->uuid &&
