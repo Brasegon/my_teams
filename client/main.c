@@ -15,8 +15,8 @@ void print_usage(void)
 
 void signal_callback(int theSignal)
 {
-    theSignal += 0;
-    exit(0);
+    if (theSignal == 11)
+        exit(0);
 }
 
 void setHandler()

@@ -41,18 +41,18 @@ static int word_len(char const *str, int k)
     while (str[k] != '\0') {
         check_gui2(str, &k);
         if (is_alphanum(str[k]) != 1)
-                return (z);
+                return (k);
         z += 1;
         k++;
     }
-    return (z);
+    return (k);
 }
 
 char **my_str_to_word_array(char const *str)
 {
-    char **array = malloc(sizeof(char *) * (nb_words(str) + 1));
+    char **array = malloc(sizeof(char *) * (nb_words(str)));
     int i = 0;
-    for (int k = 0, a = 0; i != nb_words(str); i += 1) {
+    for (int k = 0, a = 0; i < nb_words(str); i += 1) {
         a = 0;
         for (;is_alphanum(str[k]) == 0; k += 1);
         array[i] = malloc(sizeof(char) * (word_len(str, k) + 1));
@@ -61,6 +61,5 @@ char **my_str_to_word_array(char const *str)
             array[i][a] = str[k];
         array[i][a] = '\0';
     }
-    array[i] = NULL;
     return (array);
 }

@@ -40,8 +40,9 @@ char *add_char_gui(char *array, char const *str, int *a, int *k)
 {
     if (str[*k] == '"') {
         *k += 1;
-        for (; str[*k] != '"'; *a += 1, *k += 1)
+        for (; str[*k] != '"'; *a += 1, *k += 1) {
             array[*a] = str[*k];
+        }
         *k += 1;
     }
     return (array);

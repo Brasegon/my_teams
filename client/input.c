@@ -33,7 +33,6 @@ void check_logout(char *input, t_client *c)
 void check_commands(t_client *c)
 {
     char **tab = my_str_to_word_array(c->buff);
-
     if (count_tab(tab) < 1)
         return;
     for (int i = 0; rfc[i].name != NULL; i += 1) {
@@ -51,7 +50,7 @@ void socketHandler(t_client *c, fd_set read, fd_set write)
             c->input = prompt();
             check_logout(c->input, c);
         } if (FD_ISSET(c->socketFd, &read)) {
-            recv(c->socketFd, c->buff, 1024, 0);
+            int z = recv(c->socketFd, c->buff, 1024, 0);
             check_commands(c);
             memset(c->buff, 0, 1024);
         } if (FD_ISSET(c->socketFd, &write)) {
