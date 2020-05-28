@@ -5,6 +5,23 @@
 ** main
 */
 #include "include/serveur.h"
+#include <signal.h>
+
+void signal_callback(int theSignal)
+{
+    theSignal += 0;
+    exit(0);
+}
+
+void setHandler()
+{
+    struct sigaction sa;
+    sa.sa_handler = signal_callback;
+    sa.sa_flags = 0;
+    sigemptyset(&sa.sa_mask);
+    if (sigaction(SIGSEGV, &sa, NULL) != 0)
+        exit(0);
+}
 
 void print_usage(void)
 {
@@ -14,6 +31,7 @@ void print_usage(void)
 
 int main(int ac, char **av)
 {
+    setHandler();
     if (ac == 2) {
         if (strcmp(av[1], "-help") == 0) {
             print_usage();
